@@ -1,0 +1,13 @@
+# Accepted findings ONLY. Every entry needs, on the line(s) above it:
+#   - the CVE / check id
+#   - a link to the tracking issue
+#   - an expiry date (YYYY-MM-DD) after which it must be re-reviewed
+# Reviewed in every PR that touches this file. Empty = nothing suppressed.
+
+# DS-0002 "run as non-root": Home Assistant add-ons run as root by design —
+# the ghcr.io/hassio-addons/base s6-overlay init and bashio require it, and a
+# USER stanza breaks the add-on. Not applicable to this deployment model.
+# https://developers.home-assistant.io/docs/add-ons/configuration
+# re-review: 2027-01-31
+AVD-DS-0002
+DS0002

@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dockerfile-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hadolint/hadolint-action@v3.4.0
+        with:
+          dockerfile: frpc-tunnel/Dockerfile
+          failure-threshold: warning
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: ShellCheck
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          # run.sh uses bashio (with-contenv shebang); check as bash, allow sourced externals
+          shellcheck --shell=bash --external-sources --exclude=SC1008 frpc-tunnel/run.sh
+
+  addon-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: frenck/action-addon-linter@v2
+        with:
+          path: ./frpc-tunnel
+
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Trivy config + fs (misconfig, secrets)
+        run: |
+          docker run --rm -v "$PWD:/workspace" aquasec/trivy:latest config /workspace \
+            --severity HIGH,CRITICAL --exit-code 1 --ignorefile /workspace/.trivyignore --quiet
+          docker run --rm -v "$PWD:/workspace" aquasec/trivy:latest fs /workspace \
+            --scanners secret,misconfig --severity HIGH,CRITICAL --exit-code 1 \
+            --ignorefile /workspace/.trivyignore --quiet

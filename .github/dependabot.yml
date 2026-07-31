@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /frpc-tunnel
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /docker
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
