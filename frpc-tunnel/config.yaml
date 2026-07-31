@@ -8,11 +8,7 @@ url: https://github.com/aldrouin/kydax_addons/tree/main/frpc-tunnel
 arch:
   - aarch64
   - amd64
-  - armv7
 init: false
-# talks to the HA UI over the internal Docker network
-hassio_api: false
-host_network: false
 options:
   server_addr: ""
   server_port: 7000
