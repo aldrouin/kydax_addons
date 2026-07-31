@@ -1,0 +1,15 @@
+# frpc sidecar for container/Core Home Assistant installs (no Supervisor).
+# Put frpc.toml (downloaded from the portal) next to this file and run:
+#   docker compose up -d
+# Point localIP in frpc.toml at your HA container/host (e.g. the HA service
+# name on the same compose network, or the host IP).
+
+services:
+  frpc:
+    image: snowdreamtech/frpc:0.70.1
+    container_name: kydax-frpc
+    restart: unless-stopped
+    network_mode: host          # simplest way to reach a host-run HA on :8123
+    volumes:
+      - ./frpc.toml:/etc/frp/frpc.toml:ro
+    command: ["-c", "/etc/frp/frpc.toml"]

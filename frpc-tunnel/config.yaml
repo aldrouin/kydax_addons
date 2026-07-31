@@ -1,0 +1,33 @@
+name: Kydax Tunnel
+version: "0.1.0"
+slug: frpc_tunnel
+description: >-
+  Outbound tunnel to the Kydax remote-access portal. Exposes this Home
+  Assistant to the portal only — no ports are opened on the venue network.
+url: https://github.com/aldrouin/kydax_addons/tree/main/frpc-tunnel
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+# talks to the HA UI over the internal Docker network
+hassio_api: false
+host_network: false
+options:
+  server_addr: ""
+  server_port: 7000
+  user: ""
+  token: ""
+  subdomain: ""
+  local_host: homeassistant
+  local_port: 8123
+  use_wss: false
+schema:
+  server_addr: str
+  server_port: port
+  user: str
+  token: password
+  subdomain: str
+  local_host: str
+  local_port: port
+  use_wss: bool

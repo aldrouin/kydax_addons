@@ -1,0 +1,15 @@
+# Copy the block the portal shows on venue registration into frpc.toml.
+serverAddr = "ha.example.com"
+serverPort = 7000
+user = "<venue id from the portal>"
+metadatas.token = "<one-time token from the portal>"
+loginFailExit = false
+transport.tls.enable = true
+# transport.protocol = "wss"   # uncomment if outbound 7000 is blocked
+
+[[proxies]]
+name = "ha"
+type = "http"
+subdomain = "<venue subdomain>"
+localIP = "127.0.0.1"          # your HA container/host
+localPort = 8123
