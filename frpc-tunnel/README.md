@@ -8,7 +8,7 @@ Assistant, and you open its full UI from `https://<venue>.ha.<domain>`.
 ## Install
 
 1. Settings → Add-ons → Add-on Store → ⋮ → Repositories → add
-   `https://github.com/aldrouin/kydax_addons`.
+   `https://github.com/aldrouin/kydax_remote`.
 2. Install **Kydax Tunnel**.
 3. In the portal (Administration → new venue) copy the generated settings
    into the add-on **Configuration**:

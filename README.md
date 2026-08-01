@@ -1,9 +1,9 @@
-# Kydax Add-ons
+# Kydax Remote
 
 Home Assistant add-on repository for the Kydax remote-access system.
 
 Add this repository in Home Assistant: Settings → Add-ons → Add-on Store →
-⋮ → Repositories → `https://github.com/aldrouin/kydax_addons`.
+⋮ → Repositories → `https://github.com/aldrouin/kydax_remote`.
 
 ## Add-ons
 

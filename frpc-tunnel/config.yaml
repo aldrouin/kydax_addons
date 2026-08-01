@@ -4,7 +4,7 @@ slug: frpc_tunnel
 description: >-
   Outbound tunnel to the Kydax remote-access portal. Exposes this Home
   Assistant to the portal only — no ports are opened on the venue network.
-url: https://github.com/aldrouin/kydax_addons/tree/main/frpc-tunnel
+url: https://github.com/aldrouin/kydax_remote/tree/main/frpc-tunnel
 arch:
   - aarch64
   - amd64
